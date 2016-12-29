@@ -4,7 +4,7 @@
 * @Email:  tamyworld@gmail.com
 * @Filename: app.formvalidation.ts
 * @Last modified by:   Tushar
-* @Last modified time: 2016-12-30T02:36:38+05:30
+* @Last modified time: 2016-12-30T02:52:10+05:30
 */
 import {Component} from '@angular/core';
 import {FormGroup,FormBuilder,Validators} from '@angular/forms';
@@ -19,15 +19,27 @@ template:   `<div class="jumbotron">
       <label>First Name:</label>
       <!-- Since we are working with template driven forms, we can use the ngModel directive to capture the values of our forms. One thing to note if you are coming from Angular 1.x. Using ngModel as shown below creates a one-way data binding, so once we hit submit the data is only sent to the controller. If we wanted to use two-way data binding, we would have to wrap the ngModel in [()] and assign an attribute to it. Also the name of the field corresponds to the name attribute so our first input will be firstName. -->
       <input type="text" class="form-control" placeholder="John" name="firstName" [formControl]="complexForm.controls['firstName']">
+      <div class="alert alert-danger" *ngIf="complexForm.controls['firstName'].hasError('required')&&complexForm.controls['firstName'].touched">
+        *you must provide your first name.
+      </div>
     </div>
     <div class="form-group"  [ngClass]="{'has-error':!complexForm.controls['lastName'].valid&&complexForm.controls['lastName'].touched}">
       <label>Last Name</label>
       <input type="text" class="form-control" placeholder="Doe" name="lastName" [formControl]="complexForm.controls['lastName']">
+      <div class="alert alert-danger" *ngIf="complexForm.controls['lastName'].hasError('required')&&complexForm.controls['lastName'].touched">
+        *you must provide your last name.
+      </div>
+      <div class="alert alert-danger" *ngIf="complexForm.controls['lastName'].hasError('minlength')&&complexForm.controls['lastName'].touched">
+        *your last name must be of atleast 5 characters.
+      </div>
+      <div class="alert alert-danger" *ngIf="complexForm.controls['lastName'].hasError('maxlength')&&complexForm.controls['lastName'].touched">
+        *your last name must not exceed 10 characters.
+      </div>
     </div>
     <div class="form-group">
       <label>Gender</label>
     </div>
-    <div class="alert alert-danger" *ngIf="!complexForm.controls['gender'].valid&&complexForm.controls['gender'].touched">You must select a gender</div>
+    <div class="alert alert-danger" *ngIf="!complexForm.controls['gender'].valid&&complexForm.controls['gender'].touched">*You must select your gender</div>
     <!-- Radio and checkboxes work much the same way -->
     <div class="radio">
       <label>
@@ -75,6 +87,7 @@ export class FormValidationComponent{
   }
 
   submitForm(value:any):void{
+    alert('Congratulations! your form is submitted');
     console.log(value)
   }
 }
