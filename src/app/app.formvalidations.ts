@@ -4,10 +4,10 @@
 * @Email:  tamyworld@gmail.com
 * @Filename: app.formvalidation.ts
 * @Last modified by:   Tushar
-* @Last modified time: 2016-12-30T02:09:20+05:30
+* @Last modified time: 2016-12-30T02:18:38+05:30
 */
 import {Component} from '@angular/core';
-import {FormGroup,FormBuilder} from '@angular/forms';
+import {FormGroup,FormBuilder,Validators} from '@angular/forms';
 
 @Component({
 selector:'form-validation',
@@ -53,7 +53,7 @@ template:   `<div class="jumbotron">
       <input type="checkbox" value="running" name="running" [formControl]="complexForm.controls['running']"> Running
     </label>
     <div class="form-group">
-      <button type="submit" class="btn btn-default">Submit</button>
+      <button type="submit" class="btn btn-default" [disabled]="!complexForm.valid">Submit</button>
     </div>
   </form>
 </div>`
@@ -64,9 +64,9 @@ export class FormValidationComponent{
 
   constructor(fb:FormBuilder){
     this.complexForm=fb.group({
-      'firstName' : "",
-      'lastName': "",
-      'gender' : "Female",
+      'firstName' : ["",Validators.required],
+      'lastName': ["",Validators.compose([Validators.required,Validators.minLength(5),Validators.maxLength(10)])],
+      'gender' : ["Male",Validators.required],
       'hiking' : false,
       'running' : false,
       'swimming' : false
