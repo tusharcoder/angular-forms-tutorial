@@ -4,7 +4,7 @@
 * @Email:  tamyworld@gmail.com
 * @Filename: app.formvalidation.ts
 * @Last modified by:   Tushar
-* @Last modified time: 2016-12-30T02:31:50+05:30
+* @Last modified time: 2016-12-30T02:36:38+05:30
 */
 import {Component} from '@angular/core';
 import {FormGroup,FormBuilder,Validators} from '@angular/forms';
@@ -15,19 +15,19 @@ template:   `<div class="jumbotron">
   <h2>Model Driven (Reactive) Form with Validation</h2>
    <!-- Here we are declaring a local variable called “form” and setting it to an instance of ngForm. This is very important. Now our local form variable becomes of type FormGroup allowing us access to the FormGroup API’s on this local variable. We use this in the ngSubmit event where we send the value of the form via form.value -->
   <form [formGroup]="complexForm" (ngSubmit)="submitForm(complexForm.value)">
-    <div class="form-group" [ngClass]="{'has-error':!complexForm.controls['firstName'].valid}" >
+    <div class="form-group" [ngClass]="{'has-error':!complexForm.controls['firstName'].valid&&complexForm.controls['firstName'].touched}" >
       <label>First Name:</label>
       <!-- Since we are working with template driven forms, we can use the ngModel directive to capture the values of our forms. One thing to note if you are coming from Angular 1.x. Using ngModel as shown below creates a one-way data binding, so once we hit submit the data is only sent to the controller. If we wanted to use two-way data binding, we would have to wrap the ngModel in [()] and assign an attribute to it. Also the name of the field corresponds to the name attribute so our first input will be firstName. -->
       <input type="text" class="form-control" placeholder="John" name="firstName" [formControl]="complexForm.controls['firstName']">
     </div>
-    <div class="form-group"  [ngClass]="{'has-error':!complexForm.controls['lastName'].valid}">
+    <div class="form-group"  [ngClass]="{'has-error':!complexForm.controls['lastName'].valid&&complexForm.controls['lastName'].touched}">
       <label>Last Name</label>
       <input type="text" class="form-control" placeholder="Doe" name="lastName" [formControl]="complexForm.controls['lastName']">
     </div>
     <div class="form-group">
       <label>Gender</label>
     </div>
-    <div class="alert alert-danger" *ngIf="!complexForm.controls['gender'].valid">You must select a gender</div>
+    <div class="alert alert-danger" *ngIf="!complexForm.controls['gender'].valid&&complexForm.controls['gender'].touched">You must select a gender</div>
     <!-- Radio and checkboxes work much the same way -->
     <div class="radio">
       <label>
