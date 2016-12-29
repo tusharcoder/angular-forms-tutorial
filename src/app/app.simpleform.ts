@@ -4,7 +4,7 @@
 * @Email:  tamyworld@gmail.com
 * @Filename: app.simpleform.ts
 * @Last modified by:   Tushar
-* @Last modified time: 2016-12-30T01:14:16+05:30
+* @Last modified time: 2016-12-30T01:18:42+05:30
 */
 import {Component} from '@angular/core';
 
@@ -58,5 +58,8 @@ import {Component} from '@angular/core';
   </div>`
 })
 export class SimpleFormComponent{
-
+  submitForm(form:any):void{
+    console.log('Form Data: ');
+    console.log(form);
+  }
 }
