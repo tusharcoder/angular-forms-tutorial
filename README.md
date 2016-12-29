@@ -1,3 +1,14 @@
+<!--
+@Author: Tushar Agarwal <Tushar>
+@Date:   2016-12-30T00:20:14+05:30
+@Email:  tamyworld@gmail.com
+@Filename: README.md
+@Last modified by:   Tushar
+@Last modified time: 2016-12-30T02:09:56+05:30
+-->
+
+
+
 # Angular2
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.24.
